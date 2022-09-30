@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import style from './Choices.module.css';
 
-const holiday = {
+const holidays = {
     newyear: 'Новый год',
     birthdayWomen: 'День рождения  Ж',
     birthdayMan:' День рождения  М',
@@ -19,6 +19,7 @@ const Choices = () => {
 
     const changeHolliday = title => {
         setHoliday(title);
+        toggleChoices();
     };
 
     return (
@@ -27,11 +28,13 @@ const Choices = () => {
                 <button className={ style.button } onClick={ toggleChoices }>{ holiday }</button>
                 { isOpenChoices && (
                     <ul className={ style.list }>
-                        { Object.entries(holiday).map(item => (
+                        { Object.entries(holidays).map(item => (
                             <li 
                                 className={ style.item } 
                                 key={ item[0] }
-                                onClick= { changeHolliday }
+                                onClick= { () => {
+                                    changeHolliday(item[1])
+                                } }
                             >
                                 { item[1] }
                             </li>
